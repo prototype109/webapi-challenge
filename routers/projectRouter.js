@@ -27,7 +27,7 @@ projectRouter.put("/:id", validateId, validateProject, async (req, res) => {
 
 projectRouter.delete("/:id", validateId, async (req, res) => {
   const successDelete = await db.remove(req.params.id);
-  res.status(200).json({ message: "succesfully deleted project" });
+  res.status(204).end();
 });
 
 projectRouter.get("/:id/actions", validateId, async (req, res) => {

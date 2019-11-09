@@ -30,6 +30,11 @@ actionRouter.put("/:id", validateId, validateAction, async (req, res) => {
   }
 });
 
+actionRouter.delete("/:id", validateId, async (req, res) => {
+  const deleteSuccess = await db.remove(req.params.id);
+  res.status(204).end();
+});
+
 async function validateId(req, res, next) {
   const id = req.params.id;
   try {
@@ -51,8 +56,14 @@ function validateAction(req, res, next) {
   if (!reqBody.description || !reqBody.notes) {
     res.status(400).json({ message: "Please input missing data" });
   } else {
+    if (reqBody.description.length > 128) {
+      res
+        .status(400)
+        .json({ message: "description length must be 128 characters or less" });
+    } else {
+      next();
+    }
     //req.body.project_id = req.params.id;
-    next();
   }
 }
 

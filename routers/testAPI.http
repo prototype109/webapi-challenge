@@ -66,6 +66,23 @@ Content-Type: application/json
     "notes": "RED"
 }
 
+### POST TEST MISSING DATA
+POST {{url}}/api/actions/1
+Content-Type: application/json
+
+{
+    "notes": "RED"
+}
+
+### POST TEST LONG DESCRIPTION
+POST {{url}}/api/actions/1
+Content-Type: application/json
+
+{
+    "description": "alsdjfldsa;jkfdsla;jfldksjal;fldsjaf;lldksjafl;djslaf;ldjsal;fjdlsajf;ldjsafl;dksjafldkjsa;lfjdslafjdlsajf;ldjsaf;ldjsalfdjlsafj;dsalfj",
+    "notes": "RED"
+}
+
 ### PUT TEST
 PUT {{url}}/api/actions/7
 Content-Type: application/json
@@ -74,3 +91,6 @@ Content-Type: application/json
     "description": "UPDATED HEHRERHRHERE",
     "notes": "DONE"
 }
+
+### DELETE TEST
+DELETE  {{url}}/api/actions/8
