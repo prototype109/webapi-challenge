@@ -30,6 +30,11 @@ projectRouter.delete("/:id", validateId, async (req, res) => {
   res.status(200).json({ message: "succesfully deleted project" });
 });
 
+projectRouter.get("/:id/actions", validateId, async (req, res) => {
+  const projectActions = await db.getProjectActions(req.params.id);
+  res.status(200).json(projectActions);
+});
+
 async function validateId(req, res, next) {
   const id = req.params.id;
   try {
