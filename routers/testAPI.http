@@ -1,6 +1,24 @@
 @url = http://localhost:4000
 
+### GET TEST
 GET {{url}}/api/projects
 
-###
+### GET BY ID TEST
 GET {{url}}/api/projects/1
+
+### POST TEST
+POST {{url}}/api/projects
+Content-Type: application/json
+
+{
+    "name": "NEW PROJECT",
+    "description": "something"
+}
+
+### POST TEST MISSING DATA
+POST {{url}}/api/projects
+Content-Type: application/json
+
+{
+    "description": "something"
+}

@@ -11,15 +11,38 @@ projectRouter.get("/", async (req, res) => {
   }
 });
 
-projectRouter.get("/:id", async (req, res) => {
-  const id = req.params.id;
+projectRouter.get("/:id", validateId, (req, res) => {
+  res.status(200).json(req.project);
+});
 
+projectRouter.post("/", validateProject, async (req, res) => {
   try {
-    const resourceArr = await db.get(id);
-    res.status(200).json(resourceArr); //empty array counts as validly obtained request data
+    const newProject = await db.insert(req.body);
+    res.status(201).json(newProject);
   } catch (error) {
     res.status(500).json(error);
   }
 });
+
+async function validateId(req, res, next) {
+  const id = req.res.id;
+  try {
+    const resourceArr = await db.get(id);
+    req.project = resourceArr;
+    next();
+  } catch (error) {
+    res.status(500).json(error);
+  }
+}
+
+function validateProject(req, res, next) {
+  const reqBody = req.body;
+
+  if (!reqBody.name || !reqBody.description) {
+    res.status(400).json({ message: "Please input missing data" });
+  } else {
+    next();
+  }
+}
 
 module.exports = projectRouter;
