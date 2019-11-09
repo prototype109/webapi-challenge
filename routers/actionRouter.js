@@ -17,8 +17,17 @@ actionRouter.get("/:id", validateId, async (req, res) => {
 });
 
 actionRouter.post("/:id", validateId, validateAction, async (req, res) => {
-  const newAction = await db.insert(req.body);
+  const newAction = await db.insert({ ...req.body, project_id: req.params.id });
   res.status(201).json(newAction);
+});
+
+actionRouter.put("/:id", validateId, validateAction, async (req, res) => {
+  try {
+    const updatedAction = await db.update(req.params.id, req.body);
+    res.status(200).json(updatedAction);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
 async function validateId(req, res, next) {
@@ -42,7 +51,7 @@ function validateAction(req, res, next) {
   if (!reqBody.description || !reqBody.notes) {
     res.status(400).json({ message: "Please input missing data" });
   } else {
-    req.body.project_id = req.params.id;
+    //req.body.project_id = req.params.id;
     next();
   }
 }

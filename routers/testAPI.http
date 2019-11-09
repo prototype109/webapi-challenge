@@ -58,10 +58,19 @@ GET {{url}}/api/actions
 GET {{url}}/api/actions/2
 
 ### POST TEST
-POST {{url}}/api/actions/2
+POST {{url}}/api/actions/1
 Content-Type: application/json
 
 {
-    "description": "STUFF IN HERE",
-    "notes": "Information"
+    "description": "HERERRERER",
+    "notes": "RED"
+}
+
+### PUT TEST
+PUT {{url}}/api/actions/7
+Content-Type: application/json
+
+{
+    "description": "UPDATED HEHRERHRHERE",
+    "notes": "DONE"
 }
