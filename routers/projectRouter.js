@@ -16,29 +16,30 @@ projectRouter.get("/:id", validateId, (req, res) => {
 });
 
 projectRouter.post("/", validateProject, async (req, res) => {
-  try {
-    const newProject = await db.insert(req.body);
-    res.status(201).json(newProject);
-  } catch (error) {
-    res.status(500).json(error);
-  }
+  const newProject = await db.insert(req.body);
+  res.status(201).json(newProject);
 });
 
 projectRouter.put("/:id", validateId, validateProject, async (req, res) => {
-  try {
-    const editedProject = await db.update(req.params.id, req.body);
-    res.status(200).json(editedProject);
-  } catch (error) {
-    res.status(500).json(error);
-  }
+  const editedProject = await db.update(req.params.id, req.body);
+  res.status(200).json(editedProject);
+});
+
+projectRouter.delete("/:id", validateId, async (req, res) => {
+  const successDelete = await db.remove(req.params.id);
+  res.status(200).json({ message: "succesfully deleted project" });
 });
 
 async function validateId(req, res, next) {
-  const id = req.res.id;
+  const id = req.params.id;
   try {
-    const resourceArr = await db.get(id);
-    req.project = resourceArr;
-    next();
+    const project = await db.get(id);
+    if (project) {
+      req.project = project;
+      next();
+    } else {
+      res.status(404).json({ message: "id of project is invalid" });
+    }
   } catch (error) {
     res.status(500).json(error);
   }

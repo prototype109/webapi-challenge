@@ -4,7 +4,7 @@
 GET {{url}}/api/projects
 
 ### GET BY ID TEST
-GET {{url}}/api/projects/1
+GET {{url}}/api/projects/3
 
 ### POST TEST
 POST {{url}}/api/projects
@@ -31,3 +31,15 @@ Content-Type: application/json
     "name": "UPDATED PROJECT",
     "description": "Project has been updated"
 }
+
+### PUT TEST INVALID ID
+PUT {{url}}/api/projects/10100101
+Content-Type: application/json
+
+{
+    "name": "al;skdjf;alsjf PROJECT",
+    "description": "Project has been updated"
+}
+
+### DELETE TEST
+DELETE {{url}}/api/projects/3
