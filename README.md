@@ -26,13 +26,25 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+  I learned that express is a node module that sits on top of nodes HTTP methods.
+  I also learned you can do a lot more than make servers with express, like making single page applications and sending files to a user with express.
+
 - [ ] Describe Middleware?
+
+  Express is made up of middleware, its like functions that take in resources to be displayed to the user or modified.
 
 - [ ] Describe a Resource?
 
+  A resource is data that is either retrieved or modified by express and it's middleware.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+  The API can return status codes through a response to inform the client of the status of the request being made to it.
+
 - [ ] How can we partition our application into sub-applications?
+
+  We can partition our application into sub-applications through the use of routing which uses a common portion of the endpoint
+  that refrences a group of route handlers to be used.
 
 ## Project Setup
 
