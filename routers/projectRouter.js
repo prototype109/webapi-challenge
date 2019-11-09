@@ -24,6 +24,15 @@ projectRouter.post("/", validateProject, async (req, res) => {
   }
 });
 
+projectRouter.put("/:id", validateId, validateProject, async (req, res) => {
+  try {
+    const editedProject = await db.update(req.params.id, req.body);
+    res.status(200).json(editedProject);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 async function validateId(req, res, next) {
   const id = req.res.id;
   try {

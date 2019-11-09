@@ -22,3 +22,12 @@ Content-Type: application/json
 {
     "description": "something"
 }
+
+### PUT TEST
+PUT {{url}}/api/projects/2
+Content-Type: application/json
+
+{
+    "name": "UPDATED PROJECT",
+    "description": "Project has been updated"
+}
